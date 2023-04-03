@@ -105,21 +105,22 @@
     ];
 
 async function fetchSpiritNumber() {
-    const url = 'https://9haz8wh4s5.execute-api.us-east-1.amazonaws.com/prob'; 
+            const url = 'http://172.22.0.8:3000'; // 替换为您的服务器地址和端口号
 
-      try {
-        const response = await fetch(url);
+            try {
+                const response = await fetch(url);
 
-        if (response.ok) {
-          const jsonResponse = await response.json();
-          console.log(jsonResponse);
-        } else {
-          console.error(`Error sending JSON-RPC request: ${response.status}`);
+                if (response.ok) {
+                    const jsonResponse = await response.json();
+                    console.log(jsonResponse);
+                    document.getElementById("result").innerHTML = JSON.stringify(jsonResponse);
+                } else {
+                    console.error(`Error sending request to server: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('Error sending request to server:', error);
+            }
         }
-      } catch (error) {
-        console.error('Error sending JSON-RPC request:', error);
-      }
-    }
 
 
     function drawCard() {
