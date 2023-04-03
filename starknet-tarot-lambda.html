@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starknet Tarot: Draw Major Arcana</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('images/background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+    }
+
+    .container {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        color: #4b0082;
+        font-weight: bold;
+    }
+
+    .card {
+        width: 400px;
+        height: 400px;
+        background-image: url('images/card-back.jpg');
+        background-size: cover;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: transform 1s;
+    }
+
+    .card.revealed {
+        transform: rotateY(180deg);
+    }
+
+    input, button {
+        margin-top: 20px;
+    }
+
+    .disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    #explanation {
+        font-size: 14px;
+        color: #4b0082;
+        font-style: italic;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Starknet Tarot: Draw Major Arcana</h1>
+        <div class="card" id="card"></div>
+        <input type="text" id="spirit-number" placeholder="Starknet spirit number" readonly>
+        <button id="fetch-button" onclick="fetchSpiritNumber()">Fetch Spirit Number</button>
+        <button id="draw-button" onclick="drawCard()" class="disabled" disabled>Draw Card</button>
+        <button id="reset-button" onclick="resetCard()" style="display: none;">Reset</button>
+        <p id="card-info"></p>
+        <p id="explanation">
+            The spirit number is derived from the Starknet mainnet block ID. Please randomly fetch a spirit number to match the querent's spirituality. Only the first draw within a short period is valid; subsequent draws are ineffective.
+        </p>
+    </div>
+
+    <script>
+        let card = document.getElementById('card');
+        let spiritNumberInput = document.getElementById('spirit-number');
+        let fetchButton = document.getElementById('fetch-button');
+        let drawButton = document.getElementById('draw-button');
+        let resetButton = document.getElementById('reset-button');
+        let cardInfo = document.getElementById('card-info');
+
+        const majorArcana = [
+            "The Fool",
+            "The Magician",
+            "The High Priestess",
+            "The Empress",
+            "The Emperor",
+            "The Hierophant",
+            "The Lovers",
+            "The Chariot",
+            "Strength",
+            "The Hermit",
+            "Wheel of Fortune",
+            "Justice",
+            "The Hanged Man",
+            "Death",
+            "Temperance",
+            "The Devil",
+            "The Tower",
+            "The Star",
+            "The Moon",
+            "The Sun",
+            "Judgement",
+            "The World"
+    ];
+
+async function fetchSpiritNumber() {
+    const url = 'https://kvw04njw91.execute-api.us-east-1.amazonaws.com/default'; // 替换为您在第13步中获得的API Gateway URL
+
+      try {
+        const response = await fetch(url);
+
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          console.log(jsonResponse);
+        } else {
+          console.error(`Error sending JSON-RPC request: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error sending JSON-RPC request:', error);
+      }
+    }
+
+
+    function drawCard() {
+        let spiritNumber = parseInt(spiritNumberInput.value);
+        if (isNaN(spiritNumber)) {
+            alert('Please enter a valid integer as your spirit number.');
+            return;
+        }
+        let cardNumber = (spiritNumber * Math.random()) % 22;
+        let roundedCardNumber = Math.floor(cardNumber);
+        card.style.backgroundImage = `url('images/major/${roundedCardNumber}.jpg')`;
+        card.classList.add('revealed');
+        drawButton.classList.add('disabled');
+        drawButton.disabled = true;
+        resetButton.style.display = 'inline-block';
+        cardInfo.innerText = `You drew card number ${roundedCardNumber}: ${majorArcana[roundedCardNumber]}`;
+    }
+
+    function resetCard() {
+        card.style.backgroundImage = "url('images/card-back.jpg')";
+        card.classList.remove('revealed');
+        drawButton.classList.remove('disabled');
+        drawButton.disabled = true;
+        fetchButton.classList.remove('disabled');
+        fetchButton.disabled = false;
+        resetButton.style.display = 'none';
+        cardInfo.innerText = '';
+        spiritNumberInput.value = '';
+    }
+</script>
+</body>
+</html>
