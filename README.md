@@ -1,6 +1,5 @@
-# starknet-tarot
+Starknet Taort
 
-Starknet Tarot
 Starknet Tarot is a web application that allows users to draw a card from the Major Arcana deck based on the latest block number of the Starknet mainnet. The application is designed to be a tool for guidance and self-reflection, inspired by the ancient practice of tarot reading.
 
 Features
@@ -14,13 +13,7 @@ Starknet Tarot is built on top of the Starknet blockchain, a secure and privacy-
 
 The application is deployed on the Glitch platform, a cloud-based development environment that provides backend API services for the application to communicate with the Starknet mainnet. The Glitch platform allows users to remix and modify the source code of the application, making it easy for developers to experiment with and contribute to the project.
 
-Installation
-To use the application locally, follow these steps:
 
-Clone the repository to your local machine
-Install the required dependencies by running npm install
-Start the server by running node server.js
-Open your web browser and navigate to http://localhost:3000
 Contributing
 Starknet Tarot is an open-source project, and contributions are welcome. To contribute, please fork the repository and submit a pull request. Before submitting a pull request, please ensure that your code adheres to the project's coding conventions and passes all tests.
 
