@@ -7,7 +7,7 @@
     <style>
     body {
         font-family: Arial, sans-serif;
-        background-image: url('images/background.jpg');
+        background-image: url(''); /* Background image URL will be set in JavaScript */
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -28,9 +28,9 @@
     }
 
     .card {
-        width: 400px;
-        height: 400px;
-        background-image: url('images/card-back.jpg');
+        width: 450px;
+        height: 450px;
+        background-image: url(''); /* Card back image URL will be set in JavaScript */
         background-size: cover;
         margin: 0 auto;
         cursor: pointer;
@@ -66,6 +66,7 @@
         <button id="draw-button" onclick="drawCard()" class="disabled" disabled>Draw Card</button>
         <button id="reset-button" onclick="resetCard()" style="display: none;">Reset</button>
         <p id="card-info"></p>
+      
         <p id="explanation">
             The spirit number is derived from the Starknet mainnet block ID. Please randomly fetch a spirit number to match the querent's spirituality. Only the first draw within a short period is valid; subsequent draws are ineffective.
         </p>
@@ -79,49 +80,112 @@
         let resetButton = document.getElementById('reset-button');
         let cardInfo = document.getElementById('card-info');
 
+        
         const majorArcana = [
-            "The Fool",
-            "The Magician",
-            "The High Priestess",
-            "The Empress",
-            "The Emperor",
-            "The Hierophant",
-            "The Lovers",
-            "The Chariot",
-            "Strength",
-            "The Hermit",
-            "Wheel of Fortune",
-            "Justice",
-            "The Hanged Man",
-            "Death",
-            "Temperance",
-            "The Devil",
-            "The Tower",
-            "The Star",
-            "The Moon",
-            "The Sun",
-            "Judgement",
-            "The World"
-    ];
+            'The Fool',
+            'The Magician',
+            'The High Priestess',
+            'The Empress',
+            'The Emperor',
+            'The Hierophant',
+            'The Lovers',
+            'The Chariot',
+            'Strength',
+            'The Hermit',
+            'Wheel of Fortune',
+            'Justice',
+            'The Hanged Man',
+            'Death',
+            'Temperance',
+            'The Devil',
+            'The Tower',
+            'The Star',
+            'The Moon',
+            'The Sun',
+            'Judgement',
+            'The World'
+        ];
 
-async function fetchSpiritNumber() {
-            const url = 'http://43.156.183.136:3000'; // 替换为您的服务器地址和端口号
 
-            try {
-                const response = await fetch(url);
 
-                if (response.ok) {
-                    const jsonResponse = await response.json();
-                    console.log(jsonResponse);
-                    document.getElementById("result").innerHTML = JSON.stringify(jsonResponse);
-                } else {
-                    console.error(`Error sending request to server: ${response.status}`);
-                }
-            } catch (error) {
-                console.error('Error sending request to server:', error);
+        // Set your Glitch asset URLs here
+        const backgroundImageUrl = 'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/background.jpg?v=1680545204537';
+        const cardBackImageUrl = 'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/card-back.jpg?v=1680572304643';
+        const majorArcanaUrls = [
+            // 0: The Fool
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/0.jpg?v=1680572312378',
+            // 1: The Magician
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/1.jpg?v=1680572317358',        
+            // 2: The High Priestess
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/2.jpg?v=1680572322457',
+            // 3: The Empress
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/3.jpg?v=1680572328224',
+            // 4: The Emperor
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/4.jpg?v=1680572334188',
+            // 5: The Hierophant
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/5.jpg?v=1680572340052',
+            // 6: The Lovers
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/6.jpg?v=1680572354822',
+            // 7: The Chariot
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/7.jpg?v=1680572358274',
+            // 8: Strength
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/8.jpg?v=1680572361990',
+            // 9: The Hermit
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/9.jpg?v=1680572366172',
+            // 10: Wheel of Fortune
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/10.jpg?v=1680572371295',
+            // 11: Justice
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/11.jpg?v=1680572382481',
+            // 12: The Hanged Man
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/12.jpg?v=1680572392132',
+            // 13: Death
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/13.jpg?v=1680572397882',
+            // 14: Temperance
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/14.jpg?v=1680572402457',
+            // 15: The Devil
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/15.jpg?v=1680572411324',
+            // 16: The Tower
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/16.jpg?v=1680572421792',
+            // 17: The Star
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/17.jpg?v=1680572425844',
+            // 18: The Moon
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/18.jpg?v=1680572432877',
+            // 19: The Sun
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/19.jpg?v=1680572438130',
+            // 20: Judgement
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/20.jpg?v=1680572444491',
+            // 21: The World
+            'https://cdn.glitch.global/df9bb9b0-1c50-4278-bf98-e62e23052ca9/21.jpg?v=1680572449657'
+        ];
+
+        // Set the background image URL
+        document.body.style.backgroundImage = `url('${backgroundImageUrl}')`;
+
+        // Set the card back image URL
+        card.style.backgroundImage = `url('${cardBackImageUrl}')`;
+
+        // ... others ...
+
+       async function fetchSpiritNumber() {
+        const url = '/api';
+
+        try {
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                console.log(jsonResponse);
+                const blockNumber = jsonResponse.result; // 
+                spiritNumberInput.value = blockNumber; // 
+                drawButton.classList.remove('disabled');
+                drawButton.disabled = false;
+            } else {
+                console.error(`Error sending request to server: ${response.status}`);
             }
+        } catch (error) {
+            console.error('Error sending request to server:', error);
         }
-
+    }
 
     function drawCard() {
         let spiritNumber = parseInt(spiritNumberInput.value);
@@ -131,7 +195,7 @@ async function fetchSpiritNumber() {
         }
         let cardNumber = (spiritNumber * Math.random()) % 22;
         let roundedCardNumber = Math.floor(cardNumber);
-        card.style.backgroundImage = `url('images/major/${roundedCardNumber}.jpg')`;
+        card.style.backgroundImage = `url('${majorArcanaUrls[roundedCardNumber]}')`;
         card.classList.add('revealed');
         drawButton.classList.add('disabled');
         drawButton.disabled = true;
@@ -140,7 +204,7 @@ async function fetchSpiritNumber() {
     }
 
     function resetCard() {
-        card.style.backgroundImage = "url('images/card-back.jpg')";
+        card.style.backgroundImage = `url('${cardBackImageUrl}')`;
         card.classList.remove('revealed');
         drawButton.classList.remove('disabled');
         drawButton.disabled = true;
@@ -150,6 +214,9 @@ async function fetchSpiritNumber() {
         cardInfo.innerText = '';
         spiritNumberInput.value = '';
     }
+
+    // ... others ...
+
 </script>
 </body>
 </html>
