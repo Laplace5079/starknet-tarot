@@ -1,4 +1,6 @@
-Starknet Taort
+Starknet Tarot
+
+Draw your Starknet Tarot Card here: https://lumbar-brash-moustache.glitch.me/
 
 Starknet Tarot is a web application that allows users to draw a card from the Major Arcana deck based on the latest block number of the Starknet mainnet. The application is designed to be a tool for guidance and self-reflection, inspired by the ancient practice of tarot reading.
 
