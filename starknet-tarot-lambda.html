@@ -65,10 +65,19 @@
         <button id="fetch-button" onclick="fetchSpiritNumber()">Fetch Spirit Number</button>
         <button id="draw-button" onclick="drawCard()" class="disabled" disabled>Draw Card</button>
         <button id="reset-button" onclick="resetCard()" style="display: none;">Reset</button>
+      <button id="charge-energy-button" onclick="chargeEnergy()">Charge Energy</button>
+          <p id="charge-energy-explanation">
+              Charge energy to increase your spirit number: interact with energy contract to increase energy (Testnet Now). 
+          </p>
+      
+         <p id="contract-address">
+              The contract address is: 0x0093c0834371ffa3af62286e3ed6d506285b215bcc66a92cd3201186dccc0ba0 
+          </p>
+
         <p id="card-info"></p>
       
         <p id="explanation">
-            The spirit number is derived from the Starknet mainnet block ID. Please randomly fetch a spirit number to match the querent's spirituality. Only the first draw within a short period is valid; subsequent draws are ineffective.
+            The spirit number is derived from the energy contract on Starknet testnet. Please fetch a spirit number to match the querent's spirituality. Only the first draw within a short period is valid; subsequent draws are ineffective.
         </p>
     </div>
 
@@ -193,7 +202,7 @@
             alert('Please enter a valid integer as your spirit number.');
             return;
         }
-        let cardNumber = (spiritNumber * Math.random()) % 22;
+        let cardNumber = (spiritNumber + 50 * Math.random()) % 22;
         let roundedCardNumber = Math.floor(cardNumber);
         card.style.backgroundImage = `url('${majorArcanaUrls[roundedCardNumber]}')`;
         card.classList.add('revealed');
@@ -215,8 +224,17 @@
         spiritNumberInput.value = '';
     }
 
+function chargeEnergy() {
+    window.location.href = 'https://testnet.starkscan.co/contract/0x0093c0834371ffa3af62286e3ed6d506285b215bcc66a92cd3201186dccc0ba0#read-write-contract-sub-write';
+}
     // ... others ...
 
 </script>
 </body>
 </html>
+
+
+
+
+
+
