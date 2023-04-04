@@ -21,6 +21,9 @@ The application is deployed on the Glitch platform, a cloud-based development en
 Contributing:
 Starknet Tarot is an open-source project, and contributions are welcome. To contribute, please fork the repository and submit a pull request. Before submitting a pull request, please ensure that your code adheres to the project's coding conventions and passes all tests.
 
+Files:
+Html is the front-end. Both Server.js and package.json are for glitch back-end. energy.cairo is used for deploying on Starknet Testnet. Hash class is 0x49c11d85027a718109f0acfc8eded6dcf5467122c418575172e2d661a481b81.
+
 License:
 Starknet Tarot is licensed under the MIT License.
 
