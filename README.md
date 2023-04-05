@@ -7,8 +7,8 @@ Starknet Tarot is a web application that allows users to draw a card from the Ma
 Features:
 Fetches the latest energy number of contruct on the Starknet testnet to use as a spirit number
 Contract 0x0093c0834371ffa3af62286e3ed6d506285b215bcc66a92cd3201186dccc0ba0 is deployed with Cairo 1.0 and will move to mainnet when mainnet is ready for 1.0.
-Draws a card from the Major Arcana deck based on the spirit number
-Displays the drawn card along with its meaning
+Draws a card from the Major Arcana deck,upright or reversed, based on the spirit number
+Displays the drawn card,upright or reversed, along with its meaning
 Provides a button for user to supply energy by interacting with contract
 Safe and reliable, does not require users to provide wallet addresses nor pay gas fees
 
